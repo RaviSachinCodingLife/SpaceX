@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import bgImg from "../assets/images/bgImg.jpeg";
+import bgImg from "../../assets/images/bgImg.jpeg";
 
 const containerStyle: CSSProperties = {
   position: "relative",

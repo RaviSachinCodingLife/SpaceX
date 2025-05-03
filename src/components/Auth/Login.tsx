@@ -1,9 +1,9 @@
 import { Box, Button, TextInput, Title, Text } from "@mantine/core";
 import * as style from "./style";
-import "../assets/scss/login.scss";
-import generateStars from "../utils/GenerateStars";
+import "../../assets/scss/login.scss";
 import SignUp from "./SignUp";
 import { useLogin } from "./useAuthHooks";
+import generateStars from "../../utils/GenerateStars";
 
 const Login = () => {
   const { form, setForm, error, handleChange, handleLogin, inputFields } =

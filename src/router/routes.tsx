@@ -5,6 +5,7 @@ import LaunchList from "../components/launches/launchList";
 import Home from "../pages/Home/Home";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
+import Navbar from "../components/Navbar/NavBar";
 
 const routes = [
     {
@@ -20,24 +21,41 @@ const routes = [
                 ),
             },
             {
-                path: "/home",
-                element: <Home />,
-            },
-            {
-                path: "/launches",
-                element: (
-                    <PrivateRoute>
-                        <LaunchList />
-                    </PrivateRoute>
-                ),
-            },
-            {
-                path: "/launches/:id",
-                element: (
-                    <PrivateRoute>
-                        <LaunchDetail />
-                    </PrivateRoute>
-                ),
+                element: <Navbar />,
+                children: [
+                    {
+                        path: "/home",
+                        element: (
+                            <PrivateRoute>
+                                <Home />
+                            </PrivateRoute>
+                        ),
+                    },
+                    {
+                        path: "/home/:id",
+                        element: (
+                            <PrivateRoute>
+                                <Home />
+                            </PrivateRoute>
+                        ),
+                    },
+                    {
+                        path: "/launches",
+                        element: (
+                            <PrivateRoute>
+                                <LaunchList />
+                            </PrivateRoute>
+                        ),
+                    },
+                    {
+                        path: "/launches/:id",
+                        element: (
+                            <PrivateRoute>
+                                <LaunchDetail />
+                            </PrivateRoute>
+                        ),
+                    },
+                ],
             },
             {
                 path: "*",

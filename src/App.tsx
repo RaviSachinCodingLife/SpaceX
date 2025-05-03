@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 import { theme } from './theme';
-import './components/assets/scss/App.scss';
+import './assets/scss/App.scss';
 
 export default function App() {
 	const { pathname } = useLocation();

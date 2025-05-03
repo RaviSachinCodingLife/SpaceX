@@ -1,6 +1,6 @@
 import { Box, Title, TextInput, Button, Text } from "@mantine/core";
 import * as style from "./style";
-import "../assets/scss/login.scss";
+import "../../assets/scss/login.scss";
 import { useSignUp } from "./useAuthHooks";
 
 const SignUp = ({ onFlip }: { onFlip: (flip: boolean) => void }) => {
