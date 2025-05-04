@@ -9,7 +9,8 @@ import HomeDetail from "../pages/Home/HomeDetail";
 import Navbar from "../components/Navbar/NavBar";
 import Shop from "../pages/shop/Shop";
 import ProductDetail from "../pages/shop/ProductDetail";
-import Cart from "../pages/shop/Cart";
+import Cart from "../pages/shop/Timeline/Cart";
+import Checkout from "../pages/shop/Checkout";
 
 const routes = [
     {
@@ -72,7 +73,7 @@ const routes = [
                         path: "/cart",
                         element: (
                             <PrivateRoute>
-                                <Cart />
+                                <Checkout />
                             </PrivateRoute>
                         ),
                     },

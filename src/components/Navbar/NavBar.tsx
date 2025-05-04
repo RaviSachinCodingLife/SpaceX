@@ -8,10 +8,7 @@ import {
   rem,
   Drawer,
   ScrollArea,
-  Avatar,
-  Text,
-  Button,
-  Badge
+  Avatar
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
