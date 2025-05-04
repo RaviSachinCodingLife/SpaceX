@@ -59,7 +59,7 @@ const btnStyle: CSSProperties = {
   fontSize: "18px",
   fontWeight: 500,
   height: "45px",
-  borderRadius: "8px",
+  borderRadius: "50px",
 };
 
 const botomTitleStyle: CSSProperties = { color: "white", textAlign: "center" };

@@ -1,12 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+import { HomeFeature, homeFeatures } from "../utils/homeFeatures";
 
 export const useHomeFeatures = () => {
-  return useQuery({
+  return useQuery<HomeFeature[]>({
     queryKey: ["homeFeatures"],
-    queryFn: async () => {
-      const res = await fetch("../assets/json/homeFeatures.json");
-      if (!res.ok) throw new Error("Failed to fetch home features");
-      return res.json();
-    },
+    queryFn: async () => homeFeatures,
   });
 };

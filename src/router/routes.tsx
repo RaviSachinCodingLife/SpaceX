@@ -5,7 +5,9 @@ import LaunchList from "../components/launches/launchList";
 import Home from "../pages/Home/Home";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
+import HomeDetail from "../pages/Home/HomeDetail";
 import Navbar from "../components/Navbar/NavBar";
+import Shop from "../pages/shop/Shop";
 
 const routes = [
     {
@@ -21,7 +23,8 @@ const routes = [
                 ),
             },
             {
-                element: <Navbar />,
+                element:
+                    <Navbar />,
                 children: [
                     {
                         path: "/home",
@@ -35,7 +38,7 @@ const routes = [
                         path: "/home/:id",
                         element: (
                             <PrivateRoute>
-                                <Home />
+                                <HomeDetail />
                             </PrivateRoute>
                         ),
                     },
@@ -52,6 +55,14 @@ const routes = [
                         element: (
                             <PrivateRoute>
                                 <LaunchDetail />
+                            </PrivateRoute>
+                        ),
+                    },
+                    {
+                        path: "/shop",
+                        element: (
+                            <PrivateRoute>
+                                <Shop />
                             </PrivateRoute>
                         ),
                     },
