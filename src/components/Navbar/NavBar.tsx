@@ -9,16 +9,25 @@ import {
   Drawer,
   ScrollArea,
   Avatar,
+  Text,
+  Button,
+  Badge
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/images/space-x-logo-white.png";
 import Footer from "../Footer/Footer";
+import { useEffect, useState } from "react";
+import { useCartStore } from "../../store/useCartStore";
 
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [opened, { toggle, close }] = useDisclosure();
+  const cart = useCartStore((state) => state.cart);
+  const { getItemCount } = useCartStore();
+  const [itemCount, setItemCount] = useState(0);
+
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const navLinks = ["Launches", "STARLINK"];
@@ -41,9 +50,14 @@ function Navbar() {
       return "??";
     }
   };
+  const isCart = location.pathname.startsWith("/cart");
+  const isShop = location.pathname.startsWith("/shop") ||
+    location.pathname.startsWith("/product/");
 
-  const isShop = location.pathname === "/shop";
-  const isCart = location.pathname === "/cart";
+  useEffect(() => {
+    setItemCount(getItemCount());
+  }, [cart, getItemCount]);
+
 
   return (
     <AppShell
@@ -166,7 +180,7 @@ function Navbar() {
                 onMouseOver={(e) => (e.currentTarget.style.color = "#999")}
                 onMouseOut={(e) => (e.currentTarget.style.color = "#fff")}
               >
-                Cart
+                Cart {itemCount > 0 && <span>({itemCount})</span>}
               </Anchor>
             )}
             <Avatar color="black" radius="xl">

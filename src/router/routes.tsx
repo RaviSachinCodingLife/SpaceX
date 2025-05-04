@@ -8,6 +8,8 @@ import PublicRoute from "./PublicRoute";
 import HomeDetail from "../pages/Home/HomeDetail";
 import Navbar from "../components/Navbar/NavBar";
 import Shop from "../pages/shop/Shop";
+import ProductDetail from "../pages/shop/ProductDetail";
+import Cart from "../pages/shop/Cart";
 
 const routes = [
     {
@@ -63,6 +65,22 @@ const routes = [
                         element: (
                             <PrivateRoute>
                                 <Shop />
+                            </PrivateRoute>
+                        ),
+                    },
+                    {
+                        path: "/cart",
+                        element: (
+                            <PrivateRoute>
+                                <Cart />
+                            </PrivateRoute>
+                        ),
+                    },
+                    {
+                        path: "/product/:slug",
+                        element: (
+                            <PrivateRoute>
+                                <ProductDetail />
                             </PrivateRoute>
                         ),
                     },
