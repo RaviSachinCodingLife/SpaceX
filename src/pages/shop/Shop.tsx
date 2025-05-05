@@ -1,12 +1,20 @@
-import { Box, Image, Text, TextInput } from '@mantine/core'
-import shopImg from "../../assets/images/Shop/shop.png"
-import * as inputstyle from "../../components/Auth/style"
-import { SearchIcon } from '../../assets/svg/SvgIcon'
-import GlobalCard from '../../components/card/Card'
-import { useProductList } from '../../hooks/useProductlist'
+import { Box, Image, Text, TextInput } from '@mantine/core';
+import shopImg from "../../assets/images/Shop/shop.png";
+import * as inputstyle from "../../components/Auth/style";
+import { SearchIcon } from '../../assets/svg/SvgIcon';
+import GlobalCard from '../../components/card/Card';
+import { useProductList } from '../../hooks/useProductlist';
+import { useState } from 'react';
 
 const Shop = () => {
 	const { data } = useProductList();
+	const [searchTerm, setSearchTerm] = useState("");
+
+	const filteredData = (data ?? []).filter(item =>
+		item.title.toLowerCase().includes(searchTerm.toLowerCase())
+	);
+
+
 	return (
 		<Box
 			sx={{
@@ -31,11 +39,11 @@ const Shop = () => {
 				</Text>
 
 				<TextInput
-					name={"search"}
-					placeholder={"Search Items"}
-					type={"text"}
-					value={"gysg"}
-					onChange={() => { }}
+					name="search"
+					placeholder="Search Items"
+					type="text"
+					value={searchTerm}
+					onChange={(e) => setSearchTerm(e.currentTarget.value)}
 					rightSection={<SearchIcon />}
 					styles={{
 						label: { ...inputstyle.textFieldLabelStyle },
@@ -44,7 +52,7 @@ const Shop = () => {
 							borderRadius: "10px !important",
 						},
 					}}
-					sx={{ alignSelf: "flex-end", paddingRight: "10px" }}
+					sx={{ alignSelf: "flex-end", paddingRight: "10px", width: "300px" }}
 				/>
 
 				<Box
@@ -56,21 +64,23 @@ const Shop = () => {
 						justifyContent: "center",
 					}}
 				>
-					{data?.map((item) => (
-						<GlobalCard
-							key={item.id}
-							image={item.image}
-							title={item.title}
-							price={item.price}
-							link={item.link}
-						/>
-					))}
+					{filteredData?.length > 0 ? (
+						filteredData.map((item) => (
+							<GlobalCard
+								key={item.id}
+								image={item.image}
+								title={item.title}
+								price={item.price}
+								link={item.link}
+							/>
+						))
+					) : (
+						<Text>No items found</Text>
+					)}
 				</Box>
-
 			</Box>
+		</Box>
+	);
+};
 
-		</Box >
-	)
-}
-
-export default Shop
+export default Shop;

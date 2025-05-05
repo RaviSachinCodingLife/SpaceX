@@ -27,7 +27,7 @@ export const homeFeatures: HomeFeature[] = [
       "This was the 18th flight for the first stage booster supporting this mission, which previously launched Ax-2, Euclid, Ax-3, CRS-30, SES ASTRA 1P, NG-21, and now 12 Starlink missions.",
     video: video,
     image: img,
-    link: "/home/STARLINK MISSION",
+    link: "/home/1",
   },
   {
     id: "2",
@@ -39,7 +39,7 @@ export const homeFeatures: HomeFeature[] = [
       "This was the 18th flight for the first stage booster supporting this mission, which previously launched Ax-2, Euclid, Ax-3, CRS-30, SES ASTRA 1P, NG-21, and now 12 Starlink missions.",
     video: video,
     image: img1,
-    link: "/home/STARLINK MISSION",
+    link: "/home/2",
   },
   {
     id: "3",
@@ -51,7 +51,7 @@ export const homeFeatures: HomeFeature[] = [
       "This was the 18th flight for the first stage booster supporting this mission, which previously launched Ax-2, Euclid, Ax-3, CRS-30, SES ASTRA 1P, NG-21, and now 12 Starlink missions.",
     video: video,
     image: img2,
-    link: "/home/ADVANCINGN HUMAN SPACEFLIGHT",
+    link: "/home/3",
   },
   {
     id: "4",
@@ -63,6 +63,6 @@ export const homeFeatures: HomeFeature[] = [
       "This was the 18th flight for the first stage booster supporting this mission, which previously launched Ax-2, Euclid, Ax-3, CRS-30, SES ASTRA 1P, NG-21, and now 12 Starlink missions.",
     video: video,
     image: img3,
-    link: "/home/TO MAKE LIFE MULTIPLANETARY",
+    link: "/home/4",
   },
 ];

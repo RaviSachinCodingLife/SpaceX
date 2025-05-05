@@ -27,7 +27,9 @@ export const useAuthStore = create<AuthState>((set) => ({
       set({ error: "Username and password are required" });
     }
   },
-  logout: () =>
+  logout: () => {
     set({ isAuthenticated: false, username: "", password: "", error: "" }),
+      localStorage.clear();
+  },
   setError: (error) => set({ error }),
 }));

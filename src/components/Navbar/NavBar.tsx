@@ -8,7 +8,10 @@ import {
   rem,
   Drawer,
   ScrollArea,
-  Avatar
+  Avatar,
+  Menu,
+  FileButton,
+  Text
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
@@ -16,6 +19,8 @@ import logo from "../../assets/images/space-x-logo-white.png";
 import Footer from "../Footer/Footer";
 import { useEffect, useState } from "react";
 import { useCartStore } from "../../store/useCartStore";
+import { useAuthStore } from "../../store/authStore";
+import { LogoutIcon, ProfileUploadIcon } from "../../assets/svg/SvgIcon";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -24,12 +29,34 @@ function Navbar() {
   const cart = useCartStore((state) => state.cart);
   const { getItemCount } = useCartStore();
   const [itemCount, setItemCount] = useState(0);
-
   const isDesktop = useMediaQuery("(min-width: 768px)");
-
   const navLinks = ["Launches", "STARLINK"];
-
   const headerHeight = rem(60);
+
+  const [file, setFile] = useState<File | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(() => {
+    const auth = JSON.parse(localStorage.getItem("user_data") || "{}");
+    return auth?.avatar || null;
+  });
+
+  useEffect(() => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const imageData = reader.result as string;
+        setAvatarUrl(imageData);
+        const userData = JSON.parse(localStorage.getItem("user_data") || "{}");
+        localStorage.setItem(
+          "user_data",
+          JSON.stringify({
+            ...userData,
+            avatar: imageData,
+          })
+        );
+      };
+      reader.readAsDataURL(file);
+    }
+  }, [file]);
 
   const getUserInitials = () => {
     try {
@@ -41,20 +68,20 @@ function Navbar() {
       } else if (username?.length === 1) {
         return username + username;
       }
-
       return "??";
     } catch {
       return "??";
     }
   };
+
   const isCart = location.pathname.startsWith("/cart");
-  const isShop = location.pathname.startsWith("/shop") ||
+  const isShop =
+    location.pathname.startsWith("/shop") ||
     location.pathname.startsWith("/product/");
 
   useEffect(() => {
     setItemCount(getItemCount());
   }, [cart, getItemCount]);
-
 
   return (
     <AppShell
@@ -180,9 +207,43 @@ function Navbar() {
                 Cart {itemCount > 0 && <span>({itemCount})</span>}
               </Anchor>
             )}
-            <Avatar color="black" radius="xl">
-              {getUserInitials().toUpperCase()}
-            </Avatar>
+
+            <Menu shadow="md" width={200}>
+              <Menu.Target>
+                <Avatar
+                  src={avatarUrl}
+                  color="black"
+                  radius="xl"
+                  style={{ cursor: "pointer" }}
+                >
+                  {getUserInitials().toUpperCase()}
+                </Avatar>
+              </Menu.Target>
+
+              <Menu.Dropdown>
+                <Menu.Item icon={<ProfileUploadIcon />} closeMenuOnClick={false}>
+                  <FileButton onChange={setFile} accept="image/png,image/jpeg">
+                    {(props) => (
+                      <Box component="span" {...props} style={{ cursor: "pointer" }}>
+                        <Text fz="sm" c="#000">
+                          Upload Image
+                        </Text>
+                      </Box>
+                    )}
+                  </FileButton>
+                </Menu.Item>
+
+                <Menu.Item
+                  icon={<LogoutIcon />}
+                  onClick={() => {
+                    useAuthStore.getState().logout();
+                    navigate("/login");
+                  }}
+                >
+                  Logout
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
           </Group>
 
           <Drawer

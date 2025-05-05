@@ -11,6 +11,7 @@ import Shop from "../pages/shop/Shop";
 import ProductDetail from "../pages/shop/ProductDetail";
 import Cart from "../pages/shop/Timeline/Cart";
 import Checkout from "../pages/shop/Checkout";
+import Starlink from "../pages/Starlink/Starlink";
 
 const routes = [
     {
@@ -82,6 +83,14 @@ const routes = [
                         element: (
                             <PrivateRoute>
                                 <ProductDetail />
+                            </PrivateRoute>
+                        ),
+                    },
+                    {
+                        path: "/starlink",
+                        element: (
+                            <PrivateRoute>
+                                <Starlink />
                             </PrivateRoute>
                         ),
                     },
