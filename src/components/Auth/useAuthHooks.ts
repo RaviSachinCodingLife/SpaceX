@@ -1,8 +1,9 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/authStore";
 import { useSignUpStore } from "../../store/signUpStore";
 import { inputFields } from "./type";
+import { showNotification } from "@mantine/notifications";
 
 const useLogin = () => {
   const navigate = useNavigate();
@@ -21,10 +22,12 @@ const useLogin = () => {
 
   const storeToken = () => {
     const token = `token-${Math.random().toString(36).substr(2)}`;
+    const expiresAt = Date.now() + 30 * 60 * 1000; 
     const userData = {
       username: form.username,
       password: form.password,
       token,
+      expiresAt,
     };
     localStorage.setItem("user_data", JSON.stringify(userData));
   };
@@ -73,10 +76,12 @@ const useSignUp = () => {
   const storeToken = () => {
     const token = `token-${Math.random().toString(36).substr(2)}`;
     const username = `${form.firstName}${form.lastName}`.toLowerCase();
+    const expiresAt = Date.now() + 30 * 60 * 1000;
     const userData = {
       username,
       password: form.password,
       token,
+      expiresAt,
     };
     localStorage.setItem("user_data", JSON.stringify(userData));
   };
@@ -122,4 +127,27 @@ const useSignUp = () => {
   return { form, error, handleChange, handleSignUp, inputFields };
 };
 
-export { useLogin, useSignUp };
+const useSessionTimeout = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const userData = JSON.parse(localStorage.getItem("user_data") || "{}");
+      const isExpired = !userData?.expiresAt || Date.now() > userData.expiresAt;
+
+      if (isExpired) {
+        localStorage.removeItem("user_data");
+        navigate("/");
+        showNotification({
+          title: "Session Timed Out",
+          message: "Your session has expired. Please log in again.",
+          color: "red",
+        });
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [navigate]);
+};
+
+export { useLogin, useSignUp, useSessionTimeout };

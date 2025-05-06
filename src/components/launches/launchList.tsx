@@ -2,6 +2,7 @@ import { useLaunches } from '../../hooks/useLaunches';
 import { Text, Title, Box, SimpleGrid, Skeleton, Button, Image, Group } from '@mantine/core';
 import launchImg from "../../assets/images/launches_header_desktop.jpg";
 import GlobalCard from '../card/Card';
+import LaunchCard from '../card/LaunchCard';
 
 const LaunchList = () => {
   const { data, isLoading } = useLaunches();
@@ -82,46 +83,25 @@ const LaunchList = () => {
                 <Skeleton height={36} mt="md" width={120} />
               </Box>
             ))
-            : data?.map((launch: any) => {
-              return (
-                <Box key={launch.id} style={{ display: "flex", flexDirection: "column", gap: "10px", padding: "50px" }}>
-                  <Image
-                    src={launch.links?.patch?.large}
-                    alt={launch.name}
-                    height={400}
-                    width="100%"
-                    radius="md"
-                    fit="contain"
-                    style={{ objectPosition: 'center', boxShadow: '0 4px 20px rgba(128, 128, 128, 0.3)', padding: "50px" }}
-                  />
-                  <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", gap: "5px" }}>
-                    <Text mt="md" c="gray" size="sm" fz={"20px"}>
-                      {new Date(launch?.date_utc).toLocaleDateString(undefined, {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </Text>
-                    <Title order={3} mt={5} fz={"32px"}>
-                      {launch.name}
-                    </Title>
-                    <Button
-                      component="a"
-                      href={`/launches/${launch.id}`}
-                      mt="md"
-                      variant="outline"
-                      color="gray"
-                      radius="md"
-                      size="sm"
-
-                      style={{ color: "#fff", alignSelf: "flex-start", width: "140px", height: "50px" }}
-                    >
-                      LEARN MORE
-                    </Button>
-                  </Box>
-                </Box>
-              );
-            })}
+            : data?.map((launch: any) => (
+              <LaunchCard
+                key={launch.id}
+                id={launch.id}
+                name={launch.name}
+                date={new Date(launch?.date_utc).toLocaleDateString(undefined, {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+                image={launch.links?.patch?.large}
+                imageFit='contain'
+                link={`/launches/${launch.id}`}
+                style={{
+                  boxShadow: '0 4px 20px rgba(128, 128, 128, 0.3)',
+                  padding: "50px"
+                }}
+              />
+            ))}
         </SimpleGrid>
       </Box>
     </Box>

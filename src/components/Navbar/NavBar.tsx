@@ -20,7 +20,7 @@ import Footer from "../Footer/Footer";
 import { useEffect, useState } from "react";
 import { useCartStore } from "../../store/useCartStore";
 import { useAuthStore } from "../../store/authStore";
-import { LogoutIcon, ProfileUploadIcon } from "../../assets/svg/SvgIcon";
+import { CareerIcon, LogoutIcon, PhoneIcon, ProfileUploadIcon } from "../../assets/svg/SvgIcon";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ function Navbar() {
   const { getItemCount } = useCartStore();
   const [itemCount, setItemCount] = useState(0);
   const isDesktop = useMediaQuery("(min-width: 768px)");
-  const navLinks = ["Launches", "STARLINK"];
+  const navLinks = ["Launches", "Starlink", "Astronaut"];
   const headerHeight = rem(60);
 
   const [file, setFile] = useState<File | null>(null);
@@ -237,10 +237,23 @@ function Navbar() {
                   icon={<LogoutIcon />}
                   onClick={() => {
                     useAuthStore.getState().logout();
-                    navigate("/login");
+                    navigate("/");
                   }}
                 >
                   Logout
+                </Menu.Item>
+
+                <Menu.Item
+                  icon={<PhoneIcon />}
+                  onClick={() => navigate("/contact")}
+                >
+                  Contact Us
+                </Menu.Item>
+                <Menu.Item
+                  icon={<CareerIcon />}
+                  onClick={() => navigate("/career")}
+                >
+                  Career
                 </Menu.Item>
               </Menu.Dropdown>
             </Menu>
@@ -275,7 +288,7 @@ function Navbar() {
               </Box>
             </ScrollArea>
           </Drawer>
-        </Box>
+        </ Box>
       }
     >
       <Outlet />
