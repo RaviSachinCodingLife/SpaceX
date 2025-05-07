@@ -1,5 +1,5 @@
 import App from "../App";
-import Login from "../components/Auth/Login";
+import Login from "../pages/Auth/Login";
 import LaunchDetail from "../components/launches/launchDetails";
 import LaunchList from "../components/launches/launchList";
 import Home from "../pages/Home/Home";

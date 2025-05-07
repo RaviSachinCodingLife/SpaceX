@@ -12,7 +12,7 @@ import {
     Alert,
 } from '@mantine/core';
 import { CreditCardIcon, InfoIcon, InfoQuestionIcon, LockIcon } from '../../../assets/svg/SvgIcon';
-import * as inputstyle from "../../../components/Auth/style"
+import * as inputstyle from "../../Auth/style"
 import { FormData } from '../Checkout';
 import { useEffect, useState } from 'react';
 

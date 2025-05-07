@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import { useState } from "react";
 import { useCartStore } from "../../../store/useCartStore";
-import * as inputstyle from "../../../components/Auth/style"
+import * as inputstyle from "../../Auth/style"
 
 const CartInfo = () => {
     const { cart, getTotal } = useCartStore();

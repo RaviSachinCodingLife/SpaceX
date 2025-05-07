@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useHomeFeatures } from "../../hooks/useHomeFeatures";
 import { HomeFeature } from "../../utils/homeFeatures";
 import { Fragment } from "react";
-import { useSessionTimeout } from "../../components/Auth/useAuthHooks";
+import { useSessionTimeout } from "../Auth/useAuthHooks";
 
 const Home = () => {
   const { data, isLoading } = useHomeFeatures();

@@ -1,6 +1,6 @@
 import { Box, Image, Text, TextInput } from '@mantine/core';
 import shopImg from "../../assets/images/Shop/shop.png";
-import * as inputstyle from "../../components/Auth/style";
+import * as inputstyle from "../Auth/style";
 import { SearchIcon } from '../../assets/svg/SvgIcon';
 import GlobalCard from '../../components/card/Card';
 import { useProductList } from '../../hooks/useProductlist';

@@ -4,7 +4,7 @@ import { showNotification } from '@mantine/notifications';
 import { CrossIcon, TickIcon } from '../../assets/svg/SvgIcon';
 import contactImg from '../../assets/images/contact-img.svg';
 import { EmailFormDetails, sendEmail } from '../../config/Email';
-import * as inputStyle from "../../components/Auth/style"
+import * as inputStyle from "../Auth/style"
 
 type FormField = 'firstName' | 'lastName' | 'email' | 'phone' | 'message';
 

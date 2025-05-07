@@ -14,7 +14,7 @@ import {
 import { Dispatch, useEffect, useState } from 'react';
 import { InfoIcon } from '../../../assets/svg/SvgIcon';
 import { FormData } from '../Checkout';
-import * as inputstyle from "../../../components/Auth/style"
+import * as inputstyle from "../../Auth/style"
 
 const Information = ({ form, setForm, username }: {
     form: FormData;
