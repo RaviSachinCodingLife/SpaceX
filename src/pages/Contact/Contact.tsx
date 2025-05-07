@@ -1,9 +1,10 @@
 import React, { Fragment, useState } from 'react';
-import { Container, Grid, Col, TextInput, Textarea, Button, Text, Image } from '@mantine/core';
+import { Container, Grid, Col, TextInput, Textarea, Button, Text, Image, Box } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { CrossIcon, TickIcon } from '../../assets/svg/SvgIcon';
 import contactImg from '../../assets/images/contact-img.svg';
 import { EmailFormDetails, sendEmail } from '../../config/Email';
+import * as inputStyle from "../../components/Auth/style"
 
 type FormField = 'firstName' | 'lastName' | 'email' | 'phone' | 'message';
 
@@ -83,17 +84,33 @@ export const Contact: React.FC = () => {
     };
 
     return (
-        <section id="connect" style={{ padding: '60px 0' }}>
-            <Container>
+        <Box
+            sx={{
+                backgroundColor: "#000",
+                color: "#fff",
+                minHeight: "100vh",
+                paddingTop: "60px",
+                marginTop: '-60px'
+            }}
+        >
+            <Container size="xl" w="100%" sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "auto",
+                minHeight: "100vh",
+            }}
+            >
                 <Grid align="center">
                     <Col span={12} md={6}>
                         <Image src={contactImg} alt="Contact Us" radius="md" />
                     </Col>
-                    <Col span={12} md={6}>
-                        <Text size="xl" weight={700} mb="sm">
+                    <Col span={12} md={6} sx={{ display: "flex", alignItems: "flex-start", flexDirection: "column", gap: "20px" }}>
+                        <Text size="xl" weight={700}>
                             Get In Touch
                         </Text>
-                        <Text size="sm" mb="md">
+                        <Text size="sm">
                             If you have any questions or concerns, please don't hesitate to contact me. I am open to any work opportunities that align with my skills and interests.
                         </Text>
                         <form onSubmit={handleSubmit}>
@@ -108,6 +125,11 @@ export const Contact: React.FC = () => {
                                                     value={formDetails[field.name]}
                                                     placeholder={field.placeholder}
                                                     onChange={(e) => onFormUpdate(field.name, e.target.value)}
+                                                    mb={"md"}
+                                                    styles={{
+                                                        label: { ...inputStyle.textFieldLabelStyle },
+                                                        input: { ...inputStyle.textFieldInputStyle },
+                                                    }}
                                                 />
                                             </Col>
                                         ) : (
@@ -118,13 +140,26 @@ export const Contact: React.FC = () => {
                                                     value={formDetails[field.name]}
                                                     placeholder={field.placeholder}
                                                     onChange={(e) => onFormUpdate(field.name, e.target.value)}
+                                                    mb={"sm"}
+                                                    styles={{
+                                                        label: { ...inputStyle.textFieldLabelStyle },
+                                                        input: { ...inputStyle.textFieldInputStyle },
+                                                    }}
                                                 />
                                             </Col>
                                         )}
                                     </Fragment>
                                 ))}
                                 <Col span={12}>
-                                    <Button type="submit" fullWidth>
+                                    <Button
+                                        type="submit"
+                                        variant="outline"
+                                        color="gray"
+                                        radius="md"
+                                        size="sm"
+                                        fullWidth
+                                        style={{ color: "#fff", height: "50px" }}
+                                    >
                                         {buttonText}
                                     </Button>
                                 </Col>
@@ -133,6 +168,6 @@ export const Contact: React.FC = () => {
                     </Col>
                 </Grid>
             </Container>
-        </section>
+        </Box>
     );
 };

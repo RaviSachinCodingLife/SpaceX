@@ -30,7 +30,7 @@ function Navbar() {
   const { getItemCount } = useCartStore();
   const [itemCount, setItemCount] = useState(0);
   const isDesktop = useMediaQuery("(min-width: 768px)");
-  const navLinks = ["Launches", "Starlink", "Astronaut"];
+  const navLinks = ["Launches", "Starlink", "Astronaut", "Careers"];
   const headerHeight = rem(60);
 
   const [file, setFile] = useState<File | null>(null);

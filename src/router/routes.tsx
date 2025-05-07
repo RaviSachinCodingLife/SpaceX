@@ -15,6 +15,7 @@ import Starlink from "../pages/Starlink/Starlink";
 import Astronaut from "../pages/Astronaut/Astronaut";
 import AstronautDetails from "../pages/Astronaut/AstronautDetails";
 import { Contact } from "../pages/Contact/Contact";
+import Careers from "../pages/Careers/Careers";
 
 const routes = [
     {
@@ -118,6 +119,14 @@ const routes = [
                         element: (
                             <PrivateRoute>
                                 <Contact />
+                            </PrivateRoute>
+                        ),
+                    },
+                    {
+                        path: "/careers",
+                        element: (
+                            <PrivateRoute>
+                                <Careers />
                             </PrivateRoute>
                         ),
                     },
