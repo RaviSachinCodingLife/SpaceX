@@ -14,6 +14,7 @@ import Checkout from "../pages/shop/Checkout";
 import Starlink from "../pages/Starlink/Starlink";
 import Astronaut from "../pages/Astronaut/Astronaut";
 import AstronautDetails from "../pages/Astronaut/AstronautDetails";
+import { Contact } from "../pages/Contact/Contact";
 
 const routes = [
     {
@@ -109,6 +110,14 @@ const routes = [
                         element: (
                             <PrivateRoute>
                                 <AstronautDetails />
+                            </PrivateRoute>
+                        ),
+                    },
+                    {
+                        path: "/contact",
+                        element: (
+                            <PrivateRoute>
+                                <Contact />
                             </PrivateRoute>
                         ),
                     },
