@@ -137,10 +137,10 @@ spaceX/
 
 ## 📫 Contact
 
-**👨‍💻 Author:** \[Your Name]
-**📧 Email:** [your-email@example.com](mailto:your-email@example.com)
-**🌐 Portfolio:** your-portfolio.com
-**🐙 GitHub:** [@yourgithubusername](https://github.com/yourgithubusername)
+**👨‍💻 Author:** Sachin Saurabh
+**📧 Email:** [ravisachin36@gmail.com](mailto:ravisachin36@gmail.com)
+**🌐 Portfolio:** [your-portfolio.com](https://linktr.ee/ravicodinglife)
+**🐙 GitHub:** [@RaviSachinCodingLife](https://github.com/RaviSachinCodingLife)
 
 ---
 
