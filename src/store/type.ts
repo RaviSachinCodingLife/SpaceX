@@ -36,6 +36,7 @@ interface CartItem {
 }
 
 interface CartState {
+  [x: string]: any;
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
   getTotal: () => number;

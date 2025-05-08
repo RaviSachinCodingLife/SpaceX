@@ -85,6 +85,7 @@ const useCheckout = () => {
     }
 
     if (active === MAX_STEP) {
+      useCartStore.getState().clearCart();
       showNotification({
         title: "Order Placed",
         message: "Your order has been successfully placed!",

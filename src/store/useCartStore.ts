@@ -15,10 +15,6 @@ export const useCartStore = create<CartState>((set, get) => ({
       newCart[existingItemIndex].quantity += item.quantity;
     } else {
       newCart.push(item);
-      console.log({
-        number: parseFloat(item.price.replace(/[^0-9.]/g, "")),
-        item,
-      });
     }
     set({ cart: newCart });
   },
@@ -29,4 +25,5 @@ export const useCartStore = create<CartState>((set, get) => ({
     }, 0),
   getItemCount: () =>
     get().cart.reduce((total, item) => total + item.quantity, 0),
+  clearCart: () => set({ cart: [] }), 
 }));

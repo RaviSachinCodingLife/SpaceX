@@ -47,13 +47,13 @@ const ProductDetailColorSwatchStyle = (
   border: productState.selectedColor === color ? "2px solid #000" : "none",
 });
 
-const ProductDetailSelectStyle: CSSProperties = {
+const ProductDetailSelectStyle: any = {
   borderRadius: "10px !important",
   padding: "10px 14px",
   height: "50px",
 };
 
-const ProductDetailNumberInputStyle: CSSProperties = {
+const ProductDetailNumberInputStyle: any = {
   borderRadius: "6px",
   padding: "10px 14px",
 };
