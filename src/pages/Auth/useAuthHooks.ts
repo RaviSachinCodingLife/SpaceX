@@ -22,7 +22,7 @@ const useLogin = () => {
 
   const storeToken = () => {
     const token = `token-${Math.random().toString(36).substr(2)}`;
-    const expiresAt = Date.now() + 300 * 60 * 1000;
+    const expiresAt = Date.now() + 30 * 60 * 1000;
     const userData = {
       username: form.username,
       password: form.password,
@@ -76,7 +76,7 @@ const useSignUp = () => {
   const storeToken = () => {
     const token = `token-${Math.random().toString(36).substr(2)}`;
     const username = `${form.firstName}${form.lastName}`.toLowerCase();
-    const expiresAt = Date.now() + 300 * 60 * 1000;
+    const expiresAt = Date.now() + 30 * 60 * 1000;
     const userData = {
       username,
       password: form.password,
