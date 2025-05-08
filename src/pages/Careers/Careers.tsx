@@ -78,7 +78,7 @@ const Careers = () => {
                     Life at SpaceX
                 </Title>
                 <Text
-                    mx={"750px"}
+                    w={"750px"}
                     m={"0 auto 40px"}
                     fz={"18px"}
                     lh={1.7}
@@ -106,7 +106,7 @@ const Careers = () => {
             <Box
                 style={style.ElonBoxStyle(elonBgImg)}
             >
-                <Box mx={"700px"} m={'0 auto'} bottom={-50} ta={"center"} pos={"relative"}>
+                <Box w={"700px"} m={'0 auto'} bottom={-50} ta={"center"} pos={"relative"}>
                     <Box fz={"18px"} c={"#fff"} opacity={0.9}>
                         <Text>
                             “SpaceX was founded under the belief that a future where humanity is out exploring the stars is fundamentally more exciting than one where we are not.”

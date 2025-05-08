@@ -58,12 +58,6 @@ const getMenuItems = ({
             onClick: () => navigate("/contact"),
         },
         {
-            key: "career",
-            icon: <CareerIcon />,
-            label: "Career",
-            onClick: () => navigate("/career"),
-        },
-        {
             key: "logout",
             icon: <LogoutIcon />,
             label: "Logout",
