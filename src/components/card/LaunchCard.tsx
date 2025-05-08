@@ -1,19 +1,11 @@
 import { Box, Button, Image, Text, Title } from "@mantine/core";
-import React, { CSSProperties } from "react";
+import { FC } from "react";
+import { LaunchCardProps } from "./type";
+import * as inputstyle from "./style"
 
-interface LaunchCardProps {
-    id: string;
-    name: string;
-    date: string;
-    image: string;
-    link: string;
-    style?: CSSProperties
-    imageFit?: "cover" | "contain" | "fill" | "scale-down" | "none";
-}
-
-const LaunchCard: React.FC<LaunchCardProps> = ({ id, name, date, image, link, style, imageFit }) => {
+const LaunchCard: FC<LaunchCardProps> = ({ id, name, date, image, link, style, imageFit }) => {
     return (
-        <Box key={id} style={{ display: "flex", flexDirection: "column", gap: "10px", padding: "50px" }}>
+        <Box key={id} style={inputstyle.LaunchCardBox}>
             <Image
                 src={image}
                 alt={name}
@@ -27,12 +19,12 @@ const LaunchCard: React.FC<LaunchCardProps> = ({ id, name, date, image, link, st
                 }}
             />
 
-            <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", gap: "5px" }}>
+            <Box style={inputstyle.LaunchCardChildBox}>
                 <Text mt="md" c="gray" size="sm" fz={"20px"}>
                     {date}
                 </Text>
 
-                <Title order={3} mt={5} fz={"32px"} sx={{ textTransform: "capitalize" }}>
+                <Title order={3} mt={5} fz={"32px"} style={inputstyle.LaunchCardTitle}>
                     {name}
                 </Title>
 
@@ -44,7 +36,7 @@ const LaunchCard: React.FC<LaunchCardProps> = ({ id, name, date, image, link, st
                     color="gray"
                     radius="md"
                     size="sm"
-                    style={{ color: "#fff", alignSelf: "flex-start", width: "140px", height: "50px" }}
+                    style={inputstyle.LaunchCardButton}
                 >
                     LEARN MORE
                 </Button>

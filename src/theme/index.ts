@@ -6,12 +6,12 @@ export const theme: MantineThemeOverride = {
 	primaryShade: 6,
 	fontFamily: 'Outfit,sans-serif',
 	fontFamilyMonospace: 'Monaco, Courier, monospace',
-	fontSizes: { // 16px
-		xs: '1rem', // 12px
-		sm: '1rem', // 14px
-		md: '1.25rem', // 16px
-		lg: '1.5rem', // 18px
-		xl: '1.8rem' // 20px
+	fontSizes: { 
+		xs: '1rem', 
+		sm: '1rem', 
+		md: '1.25rem', 
+		lg: '1.5rem', 
+		xl: '1.8rem' 
 	},
 	breakpoints: {
 		xs: '30em',
@@ -20,13 +20,6 @@ export const theme: MantineThemeOverride = {
 		lg: '74em',
 		xl: '90em',
 	},
-	// radius: {
-	// 	xs: '0.25rem',
-	// 	sm: '0.375rem',
-	// 	md: '0.5rem',
-	// 	lg: '0.75rem',
-	// 	xl: '1rem'
-	// },
 	spacing: {
 		xs: '0.25rem',
 		sm: '0.5rem',

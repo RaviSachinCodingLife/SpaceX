@@ -24,7 +24,6 @@ export const sendEmail = async (details: EmailFormDetails) => {
     message: details.message,
   };
 
-
   try {
     const result = await emailjs.send(
       serviceId,
@@ -32,10 +31,9 @@ export const sendEmail = async (details: EmailFormDetails) => {
       templateParams,
       publicKey
     );
-    console.log("✅ Email sent successfully!", result, {templateParams});
     return result;
   } catch (error) {
-    console.error("❌ Error sending email:", error, templateParams);
+    console.error("Error sending email:", error, templateParams);
     throw new Error("Unable to send email");
   }
 };

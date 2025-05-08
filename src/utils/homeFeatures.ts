@@ -3,18 +3,8 @@ import img1 from "../assets/images/2.jpg";
 import img2 from "../assets/images/3.jpg";
 import img3 from "../assets/images/4.jpg";
 import video from "../assets/video/SpaceX Starlink 253 launch and Falcon 9 first stage landing, 2 May 2025.mp4";
+import { HomeFeature } from "./type";
 
-export interface HomeFeature {
-  id: string;
-  title: string;
-  subtitle: string;
-  image: string;
-  link: string;
-  date: string;
-  video: string;
-  desc: string;
-  subDesc: string;
-}
 
 export const homeFeatures: HomeFeature[] = [
   {

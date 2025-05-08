@@ -1,56 +1,35 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useProductDetail } from '../../hooks/usePrductDetail';
 import {
-    Grid,
-    Image,
-    Text,
-    Title,
-    Select,
-    Button,
-    NumberInput,
-    Group,
-    Box,
-    ColorSwatch,
-    Stack,
-    Divider,
-    List,
-    Center,
+    Grid, Image, Text, Title, Select, Button,
+    NumberInput, Group, Box, ColorSwatch, Stack, Divider, List
 } from '@mantine/core';
 import "../../assets/scss/App.scss";
-import { CartItems } from '../../utils/cartItems';
-import { useCartStore } from '../../store/useCartStore';
-import { Notifications, showNotification } from '@mantine/notifications';
+import { showNotification } from '@mantine/notifications';
 import { CrossIcon } from '../../assets/svg/SvgIcon';
+import * as boxStyle from "../Astronaut/style";
+import * as style from "./style";
+import { useProductHook } from './useShopHook';
 
 const ProductDetail = () => {
-    const { slug } = useParams();
-    const { addToCart, cart } = useCartStore();
-    const [isAdded, setIsAdded] = useState(false);
+    const hookResult = useProductHook();
+    if (!hookResult || !hookResult.data) return null;
 
-    const product = CartItems.find((item) => item.title === slug);
-
-    if (!product) return null;
-    const { data } = useProductDetail(product.id);
-
-    const [productState, setProductState] = useState({
-        quantity: 1,
-        selectedColor: null as string | null,
-        selectedSize: null as string | null,
-    });
-
-    console.log({ data });
-
-    if (!data) return null;
+    const {
+        data,
+        setProductState,
+        productState,
+        isAdded,
+        addToCart,
+        setIsAdded,
+    } = hookResult;
 
     const handleAddToCart = () => {
         const { selectedColor, selectedSize, quantity } = productState;
 
         if (!selectedColor || !selectedSize) {
             showNotification({
-                title: 'Selection Missing',
-                message: 'Please select a color and size before adding to cart.',
-                color: 'red',
+                title: "Selection Missing",
+                message: "Please select a color and size before adding to cart.",
+                color: "red",
                 icon: <CrossIcon />,
             });
             return;
@@ -69,101 +48,108 @@ const ProductDetail = () => {
         setIsAdded(true);
     };
 
-    console.log("Current Cart:", cart);
+    const productAttributes = [
+        {
+            label: 'Color',
+            value: productState.selectedColor,
+            render: (
+                <Group spacing="xs">
+                    {data.color?.map((color: string, idx: number) => (
+                        <ColorSwatch
+                            key={idx}
+                            color={color}
+                            size={28}
+                            onClick={() =>
+                                setProductState((prev) => ({ ...prev, selectedColor: color }))
+                            }
+                            style={style.ProductDetailColorSwatchStyle(productState, color)}
+                        />
+                    ))}
+                </Group>
+            ),
+        },
+        {
+            label: 'Size',
+            render: (
+                <Select
+                    placeholder="Select size"
+                    data={data.size}
+                    value={productState.selectedSize}
+                    onChange={(value) =>
+                        setProductState((prev) => ({ ...prev, selectedSize: value }))
+                    }
+                    size="md"
+                    styles={{ input: style.ProductDetailSelectStyle }}
+                />
+            ),
+        },
+        {
+            label: 'Quantity',
+            render: (
+                <NumberInput
+                    value={productState.quantity}
+                    onChange={(value) =>
+                        setProductState((prev) => ({
+                            ...prev,
+                            quantity: value || 1,
+                        }))
+                    }
+                    min={1}
+                    max={10}
+                    size="md"
+                    w={120}
+                    styles={{ input: style.ProductDetailNumberInputStyle }}
+                />
+            ),
+        },
+    ];
 
     return (
-        <Box sx={{
-            backgroundColor: "#000",
-            minHeight: "100vh",
-            paddingTop: "70px",
-            marginTop: '-60px'
-        }}>
-            <Grid gutter="xl" sx={{ backgroundColor: "#fff", padding: "10px" }}>
+        <Box style={boxStyle.BoxStyle}>
+            <Grid gutter="xl" style={style.ProductDetailGridStyle}>
                 <Grid.Col span={12} md={6}>
                     <Image
                         radius="md"
                         src={data.image}
                         alt={data.title}
                         fit="contain"
-                        styles={{ imageWrapper: { background: '#f9f9f9', padding: '24px' } }}
+                        styles={{ imageWrapper: { ...style.ProductDetailImageStyle } }}
                     />
                 </Grid.Col>
 
                 <Grid.Col span={12} md={4}>
-                    <Stack spacing="lg" sx={{ paddingTop: "18px" }}>
-                        <Title order={2} fw={500} sx={{ fontSize: '24px' }}>{data.title}</Title>
-                        <Text size="lg" fw={500}>{data.price}</Text>
+                    <Stack spacing="lg" pt="18px">
+                        <Title order={2} fw={500} fz="24px" c="#000">{data.title}</Title>
+                        <Text size="lg" fw={500} c="grey">{data.price}</Text>
 
                         <Divider />
 
                         <Box>
                             <List spacing="xs">
-                                <Text fw={500} mb="xs" size="md">Fabric Content:</Text>
-                                <List.Item c={"grey"}>
+                                <Text fw={500} mb="xs" size="md" c="#000">Fabric Content:</Text>
+                                <List.Item c="grey">
                                     <Text color="grey" size="sm">{data.fabricContent}</Text>
                                 </List.Item>
                             </List>
                         </Box>
 
-                        <Box>
-                            <Text size={'sm'} c={"grey"} mb="xs">Color: <span style={{ color: "#000" }}>{productState.selectedColor}</span> </Text>
-                            <Group spacing="xs">
-                                {data.color?.map((color: string, idx: number) => (
-                                    <ColorSwatch
-                                        key={idx}
-                                        color={color}
-                                        size={28}
-                                        onClick={() =>
-                                            setProductState((prev) => ({ ...prev, selectedColor: color }))}
-                                        style={{
-                                            cursor: 'pointer',
-                                            border: productState.selectedColor === color ? '2px solid #000' : 'none',
-                                        }}
-                                    />
-                                ))}
-                            </Group>
-                        </Box>
-
-                        <Box>
-                            <Text size={'sm'} c={"grey"} mb="xs">Size:</Text>
-                            <Select
-                                placeholder="Select size"
-                                data={data.size}
-                                value={productState.selectedSize || data.size?.[0]}
-                                onChange={(value) =>
-                                    setProductState((prev) => ({ ...prev, selectedSize: value }))
-                                }
-                                size="md"
-                                styles={{
-                                    input: {
-                                        borderRadius: "10px !important", padding: '10px 14px', height: "50px"
-                                    },
-                                }}
-
-                            />
-                        </Box>
-
-                        <Box>
-                            <Text fw={600} mb="xs">Quantity:</Text>
-                            <NumberInput
-                                value={productState.quantity}
-                                onChange={(value) =>
-                                    setProductState((prev) => ({
-                                        ...prev,
-                                        quantity: value || 1,
-                                    }))
-                                }
-                                min={1}
-                                max={10}
-                                size="md"
-                                w={120}
-                                styles={{
-                                    input: { borderRadius: '6px', padding: '10px 14px' },
-                                }}
-                            />
-                        </Box>
+                        {productAttributes.map(({ label, value, render }, index) => (
+                            <Box key={index}>
+                                {label && (
+                                    <Text size="sm" c="grey" mb="xs">
+                                        {label}:{value !== undefined && typeof value === 'string' && (
+                                            <span style={{ color: "#000" }}> {value}</span>
+                                        )}
+                                    </Text>
+                                )}
+                                {render}
+                            </Box>
+                        ))}
 
                         <Button
+                            variant="filled"
+                            color="dark"
+                            size="md"
                             onClick={handleAddToCart}
                         >
                             {isAdded ? "Go to Cart" : "Add to Cart"}
@@ -171,7 +157,6 @@ const ProductDetail = () => {
                     </Stack>
                 </Grid.Col>
             </Grid>
-            
         </Box>
     );
 };

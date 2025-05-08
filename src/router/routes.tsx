@@ -1,7 +1,5 @@
 import App from "../App";
 import Login from "../pages/Auth/Login";
-import LaunchDetail from "../components/launches/launchDetails";
-import LaunchList from "../components/launches/launchList";
 import Home from "../pages/Home/Home";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
@@ -9,13 +7,15 @@ import HomeDetail from "../pages/Home/HomeDetail";
 import Navbar from "../components/Navbar/NavBar";
 import Shop from "../pages/shop/Shop";
 import ProductDetail from "../pages/shop/ProductDetail";
-import Cart from "../pages/shop/Timeline/Cart";
 import Checkout from "../pages/shop/Checkout";
 import Starlink from "../pages/Starlink/Starlink";
 import Astronaut from "../pages/Astronaut/Astronaut";
 import AstronautDetails from "../pages/Astronaut/AstronautDetails";
 import { Contact } from "../pages/Contact/Contact";
 import Careers from "../pages/Careers/Careers";
+import NotFound from "../components/NotFound/NotFound";
+import LaunchDetail from "../pages/Launches/launchDetails";
+import LaunchList from "../pages/Launches/launchList";
 
 const routes = [
     {
@@ -134,7 +134,7 @@ const routes = [
             },
             {
                 path: "*",
-                element: <div>404 Not Found</div>,
+                element: <NotFound />,
             },
         ],
     },

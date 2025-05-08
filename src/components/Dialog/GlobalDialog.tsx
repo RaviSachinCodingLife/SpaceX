@@ -1,8 +1,6 @@
-import { Dialog, DialogProps } from '@mantine/core';
+import { Dialog } from '@mantine/core';
+import { GlobalDialogProps } from './type';
 
-interface GlobalDialogProps extends DialogProps {
-  children: React.ReactNode;
-}
 
 const GlobalDialog = ({ children, ...props }: GlobalDialogProps) => {
   return (

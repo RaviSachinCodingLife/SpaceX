@@ -1,48 +1,33 @@
 import {
-    Paper,
-    Title,
     TextInput,
     Text,
     Box,
-    Button,
     Divider,
     Group,
     Select,
     Stack,
     Alert,
+    Title,
 } from '@mantine/core';
-import { Dispatch, useEffect, useState } from 'react';
 import { InfoIcon } from '../../../assets/svg/SvgIcon';
-import { FormData } from '../Checkout';
-import * as inputstyle from "../../Auth/style"
+import * as inputstyle from '../../Auth/style';
+import { FormData } from '../type';
+import { InformationProps } from './type';
+import { useInformation } from './useTimelineHook';
 
-const Information = ({ form, setForm, username }: {
-    form: FormData;
-    setForm: Dispatch<React.SetStateAction<FormData>>;
-    username: string
-}) => {
-    const [isValidForm, setIsValidForm] = useState(false);
+const Information = ({ form, setForm, username }: InformationProps) => {
 
+    const { isValidForm, handleChange } = useInformation(form, setForm)
+    const textInputFields = [
+        { label: 'Full name', placeholder: 'Enter full name', key: 'fullName' },
+        { label: 'Address', placeholder: 'Enter address', key: 'address' },
+        { label: 'City', placeholder: 'Enter city', key: 'city' },
+    ];
 
-    const handleChange = (field: string, value: string) => {
-        setForm((prev) => ({ ...prev, [field]: value }));
-    };
-
-    const validateForm = () => {
-        const newErrors: Record<string, boolean> = {};
-        Object.entries(form).forEach(([key, value]) => {
-            if (typeof value === "string" && !value.trim()) {
-                newErrors[key] = true;
-            }
-        });
-        return Object.keys(newErrors).length === 0;
-    };
-
-
-    useEffect(() => {
-        const valid = validateForm();
-        setIsValidForm(valid);
-    }, [form]);
+    const sideBySideFields = [
+        { label: 'State', placeholder: 'State', key: 'state' },
+        { label: 'ZIP Code', placeholder: 'ZIP', key: 'zip' },
+    ];
 
     return (
         <Stack spacing="md">
@@ -59,7 +44,7 @@ const Information = ({ form, setForm, username }: {
                 <Title order={4} mb="xs">
                     Contact
                 </Title>
-                <Text size="sm" color="gray" sx={{ textTransform: "capitalize" }}>
+                <Text size="sm" color="gray" tt="capitalize">
                     {username}
                 </Text>
             </Box>
@@ -72,85 +57,46 @@ const Information = ({ form, setForm, username }: {
                 </Title>
 
                 {!isValidForm && (
-
                     <Alert variant="outline" color="red" title="Alert title" icon={<InfoIcon />}>
                         We are unable to ship to a PO box. Please note that if you enter a PO box, your order will be canceled.
                     </Alert>
-
                 )}
 
-                <TextInput
-                    label="Full name"
-                    placeholder="John Doe"
-                    value={form.fullName}
-                    onChange={(e) => handleChange('fullName', e.target.value)}
-                    mb="sm"
-                    styles={{
-                        label: { ...inputstyle.textFieldLabelStyle },
-                        input: {
-                            ...inputstyle.textFieldInputStyle,
-                            borderRadius: "10px !important",
-                        },
-                    }}
-                />
-
-                <TextInput
-                    label="Address"
-                    placeholder="123 Main St"
-                    value={form.address}
-                    onChange={(e) => handleChange('address', e.target.value)}
-                    mb="sm"
-                    styles={{
-                        label: { ...inputstyle.textFieldLabelStyle },
-                        input: {
-                            ...inputstyle.textFieldInputStyle,
-                            borderRadius: "10px !important",
-                        },
-                    }}
-                />
-
-                <TextInput
-                    label="City"
-                    placeholder="City"
-                    value={form.city}
-                    onChange={(e) => handleChange('city', e.target.value)}
-                    mb="sm"
-                    styles={{
-                        label: { ...inputstyle.textFieldLabelStyle },
-                        input: {
-                            ...inputstyle.textFieldInputStyle,
-                            borderRadius: "10px !important",
-                        },
-                    }}
-                />
+                {textInputFields.map(({ label, placeholder, key }) => (
+                    <TextInput
+                        key={key}
+                        label={label}
+                        placeholder={placeholder}
+                        value={form[key as keyof FormData]}
+                        onChange={(e) => handleChange(key, e.target.value)}
+                        mb="sm"
+                        styles={{
+                            label: { ...inputstyle.textFieldLabelStyle },
+                            input: {
+                                ...inputstyle.textFieldInputStyle,
+                                borderRadius: '10px !important',
+                            },
+                        }}
+                    />
+                ))}
 
                 <Group grow>
-                    <TextInput
-                        label="State"
-                        placeholder="State"
-                        value={form.state}
-                        onChange={(e) => handleChange('state', e.target.value)}
-                        styles={{
-                            label: { ...inputstyle.textFieldLabelStyle },
-                            input: {
-                                ...inputstyle.textFieldInputStyle,
-                                borderRadius: "10px !important",
-                            },
-                        }}
-                    />
-                    <TextInput
-                        label="ZIP Code"
-                        placeholder="ZIP"
-                        value={form.zip}
-                        onChange={(e) => handleChange('zip', e.target.value)}
-                        styles={{
-                            label: { ...inputstyle.textFieldLabelStyle },
-                            input: {
-                                ...inputstyle.textFieldInputStyle,
-                                borderRadius: "10px !important",
-                            },
-                        }}
-                    />
+                    {sideBySideFields.map(({ label, placeholder, key }) => (
+                        <TextInput
+                            key={key}
+                            label={label}
+                            placeholder={placeholder}
+                            value={form[key as keyof FormData]}
+                            onChange={(e) => handleChange(key, e.target.value)}
+                            styles={{
+                                label: { ...inputstyle.textFieldLabelStyle },
+                                input: {
+                                    ...inputstyle.textFieldInputStyle,
+                                    borderRadius: '10px !important',
+                                },
+                            }}
+                        />
+                    ))}
                 </Group>
 
                 <Select
@@ -164,7 +110,7 @@ const Information = ({ form, setForm, username }: {
                         label: { ...inputstyle.textFieldLabelStyle },
                         input: {
                             ...inputstyle.textFieldInputStyle,
-                            borderRadius: "10px !important",
+                            borderRadius: '10px !important',
                         },
                     }}
                 />

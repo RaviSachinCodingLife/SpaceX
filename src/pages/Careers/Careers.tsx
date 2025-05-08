@@ -1,45 +1,28 @@
 import { Box, Container, Title, Text, ActionIcon, Button } from '@mantine/core';
-import backgroundImage from "../../assets/images/Careers/SpaceX_Careers_BG.png";
 import img1 from "../../assets/images/Careers/6.jpg";
 import img2 from "../../assets/images/Careers/5.jpg";
 import img3 from "../../assets/images/Careers/4.jpg";
 import img4 from "../../assets/images/Careers/3.jpg";
 import img5 from "../../assets/images/Careers/2.jpg";
-import elonBgImg from "../../assets/images/Careers/1.jpg"
+import elonBgImg from "../../assets/images/Careers/1.jpg";
 import { Carousel } from '@mantine/carousel';
+import * as inputType from "../Astronaut/style";
+import * as style from "./style";
 
 const Careers = () => {
     return (
         <Box
-            sx={{
-                backgroundColor: "#000",
-                color: "#fff",
-                minHeight: "100vh",
-                paddingTop: "60px",
-            }}
+            style={inputType.BoxStyle}
         >
             {/* Header Banner */}
             <Box
-                sx={{
-                    backgroundImage: `url(${backgroundImage})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    minHeight: '100vh',
-                    color: '#fff',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    textAlign: 'center',
-                    padding: '20px',
-                    marginTop: "-120px"
-                }}
+                style={style.CareersHeaderStyle}
             >
                 <Container size="md">
-                    <Title order={1} sx={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '20px' }}>
+                    <Title order={1} fz={"48px"} fw={"bold"} mb={"20px"}>
                         FIND YOUR FUTURE
                     </Title>
-                    <Text sx={{ fontSize: '18px', lineHeight: 1.6 }}>
+                    <Text size={"md"} fz={"18px"} lh={1.6}>
                         SpaceX is looking for world-class talent ready to tackle challenging projects that will ultimately enable life on other planets.
                         We are an equal opportunity employer offering competitive salaries, comprehensive health benefits and equity packages.
                     </Text>
@@ -60,33 +43,19 @@ const Careers = () => {
                 {[img1, img2, img3, img4, img5].map((image, index) => (
                     <Carousel.Slide key={index}>
                         <Box
-                            sx={{
-                                backgroundImage: `url(${image})`,
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center',
-                                height: '100%',
-                                position: 'relative',
-                            }}
+                            style={style.CareersCarouselStyle(image)}
                         >
                             <Container
                                 size="lg"
-                                sx={{
-                                    position: 'absolute',
-                                    top: '50%',
-                                    right: "-10%",
-                                    transform: 'translate(-50%, -50%)',
-                                    color: '#fff',
-                                    textAlign: 'left',
-                                    maxWidth: '600px',
-                                }}
+                                style={style.CareersCarouselContainerStyle}
                             >
-                                <Text sx={{ fontSize: '14px', letterSpacing: '1px', marginBottom: '10px' }}>
+                                <Text size={'md'} fz={"14px"} mb={"10px"}>
                                     MAKE AN IMPACT
                                 </Text>
-                                <Title order={2} sx={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '12px' }}>
+                                <Title order={2} fz={"36px"} fw={"bold"} mb={"12px"}>
                                     GLOBAL BROADBAND INTERNET
                                 </Title>
-                                <Text sx={{ fontSize: '16px', lineHeight: 1.5 }}>
+                                <Text size={'sm'} fz={"16px"} lh={1.5}>
                                     Drive development of the Starlink constellation to provide fast, reliable internet to populations with little or no connectivity — improving access to information, learning, communication, and commerce.
                                 </Text>
                             </Container>
@@ -97,35 +66,22 @@ const Careers = () => {
 
             {/* Life at SpaceX Section */}
             <Box
-                sx={{
-                    backgroundColor: '#000',
-                    color: '#fff',
-                    textAlign: 'center',
-                    padding: '80px 20px',
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "10px",
-                    justifyContent: "center"
-                }}
+                style={style.CareersSpacXStyle}
             >
                 <Title
                     order={2}
-                    sx={{
-                        fontSize: '42px',
-                        fontWeight: 'bold',
-                        marginBottom: '30px',
-                        textTransform: 'uppercase',
-                    }}
+                    fz={"42px"}
+                    fw={'bold'}
+                    mb={"30px"}
+                    tt={"uppercase"}
                 >
                     Life at SpaceX
                 </Title>
                 <Text
-                    sx={{
-                        maxWidth: '750px',
-                        margin: '0 auto 40px',
-                        fontSize: '18px',
-                        lineHeight: 1.7,
-                    }}
+                    mx={"750px"}
+                    m={"0 auto 40px"}
+                    fz={"18px"}
+                    lh={1.7}
                 >
                     At SpaceX, we are actively developing technologies with the potential to change the
                     course of life on Earth and beyond. We believe that hard work and innovative solutions
@@ -140,22 +96,7 @@ const Careers = () => {
                     color="dark"
                     size="xl"
                     radius="sm"
-                    sx={{
-                        border: '1px solid #fff',
-                        padding: '12px 30px',
-                        fontWeight: 600,
-                        fontSize: '14px',
-                        textTransform: 'uppercase',
-                        letterSpacing: '1px',
-                        transition: 'background 0.3s, color 0.3s',
-                        alignSelf: "center",
-                        color: "#fff",
-                        width: "200px",
-                        '&:hover': {
-                            backgroundColor: '#fff',
-                            color: '#000',
-                        },
-                    }}
+                    sx={style.CareersSpacXActionIconStyle}
                 >
                     Learn More
                 </ActionIcon>
@@ -163,63 +104,33 @@ const Careers = () => {
 
             {/* Elon Section */}
             <Box
-                sx={{
-                    backgroundImage: `url(${elonBgImg})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    height: '100vh',
-                    width: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'flex-end',
-                    position: 'relative',
-                    padding: '0 40px 80px 40px',
-                    color: '#fff',
-                }}
+                style={style.ElonBoxStyle(elonBgImg)}
             >
-                <Box sx={{ maxWidth: '700px', margin: '0 auto', bottom: -50, textAlign: 'center', position: 'relative' }}>
-                    <Box sx={{ fontSize: '18px', color: '#fff', opacity: 0.9 }}>
+                <Box mx={"700px"} m={'0 auto'} bottom={-50} ta={"center"} pos={"relative"}>
+                    <Box fz={"18px"} c={"#fff"} opacity={0.9}>
                         <Text>
                             “SpaceX was founded under the belief that a future where humanity is out exploring the stars is fundamentally more exciting than one where we are not.”
                         </Text>
-                        <Text mt={10} sx={{ textAlign: 'center', color: '#fff', opacity: 0.9, fontSize: '18px', }}>
+                        <Text mt={10} fz={"18px"} ta={"center"} c={"#fff"} opacity={0.9}>
                             – Elon Musk
                         </Text>
                     </Box>
 
                     <Box
-                        sx={{
-                            height: '70px',
-                            width: '2px',
-                            backgroundColor: '#fff',
-                            margin: '40px auto 20px auto',
-                        }}
+                        style={style.ElonButtonBoxStyle}
                     />
 
                     <Button
                         variant="outline"
                         size="md"
-                        sx={{
-                            border: '1px solid #fff',
-                            color: '#fff',
-                            textTransform: 'uppercase',
-                            fontSize: '12px',
-                            letterSpacing: '1px',
-                            padding: '10px 24px',
-                            fontWeight: 600,
-                            '&:hover': {
-                                backgroundColor: '#fff',
-                                color: '#000',
-                            },
-                        }}
+                        sx={style.ElonBUttonStyle}
                     >
                         Find Your Future
                     </Button>
                 </Box>
             </Box>
 
-        </Box>
+        </Box >
     );
 };
 

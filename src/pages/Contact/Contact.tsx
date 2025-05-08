@@ -1,155 +1,122 @@
-import React, { Fragment, useState } from 'react';
-import { Container, Grid, Col, TextInput, Textarea, Button, Text, Image, Box } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
-import { CrossIcon, TickIcon } from '../../assets/svg/SvgIcon';
-import contactImg from '../../assets/images/contact-img.svg';
-import { EmailFormDetails, sendEmail } from '../../config/Email';
-import * as inputStyle from "../Auth/style"
+import React, { FC, FormEvent } from "react";
+import {
+    Container,
+    Grid,
+    Col,
+    TextInput,
+    Textarea,
+    Button,
+    Text,
+    Image,
+    Box,
+} from "@mantine/core";
+import { showNotification } from "@mantine/notifications";
+import { CrossIcon, TickIcon } from "../../assets/svg/SvgIcon";
+import contactImg from "../../assets/images/contact-img.svg";
+import { EmailFormDetails, sendEmail } from "../../config/Email";
+import * as inputStyle from "../Auth/style";
+import * as boxStyle from "../Astronaut/style";
+import * as style from "./style";
+import { useContact } from "./useContactHook";
 
-type FormField = 'firstName' | 'lastName' | 'email' | 'phone' | 'message';
+export const Contact: FC = () => {
+    const {
+        formDetails,
+        setButtonText,
+        buttonText,
+        phoneValidation,
+        onFormUpdate,
+        formFields,
+        setFormDetails,
+        formInitialDetails,
+    } = useContact();
 
-const formInitialDetails: Record<FormField, string> = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    message: '',
-};
-
-export const Contact: React.FC = () => {
-    const [formDetails, setFormDetails] = useState<typeof formInitialDetails>(formInitialDetails);
-    const [buttonText, setButtonText] = useState('Send');
-
-    const formFields: { name: FormField; type: string; placeholder: string }[] = [
-        { name: 'firstName', type: 'text', placeholder: 'First Name' },
-        { name: 'lastName', type: 'text', placeholder: 'Last Name' },
-        { name: 'email', type: 'email', placeholder: 'Email Address' },
-        { name: 'phone', type: 'tel', placeholder: 'Phone No.' },
-        { name: 'message', type: 'textarea', placeholder: 'Message' },
-    ];
-
-    const onFormUpdate = (category: FormField, value: string) => {
-        setFormDetails((prevDetails) => ({
-            ...prevDetails,
-            [category]: value,
-        }));
-    };
-
-    const phoneValidation = (phone: string) => /^[0-9]{1,10}$/.test(phone);
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setButtonText('Sending...');
+        setButtonText("Sending...");
 
         if (!phoneValidation(formDetails.phone)) {
             showNotification({
-                title: 'Invalid phone number',
-                message: 'Please enter a valid phone number (1-10 digits).',
-                color: 'red',
+                title: "Invalid phone number",
+                message: "Please enter a valid phone number (1–10 digits).",
+                color: "red",
                 icon: <CrossIcon />,
             });
-            setButtonText('Send');
+            setButtonText("Send");
             return;
         }
 
-        const emailDetail: EmailFormDetails = {
-            firstName: formDetails.firstName,
-            lastName: formDetails.lastName,
-            phone: formDetails.phone,
-            message: formDetails.message,
-            email: formDetails.email
-        };
-
+        const emailDetail: EmailFormDetails = { ...formDetails };
 
         try {
-            const result = await sendEmail(emailDetail);
-            console.log('✅ Email send result:', { emailDetail });
+            await sendEmail(emailDetail);
+            console.log("✅ Email sent:", { emailDetail });
             setFormDetails(formInitialDetails);
             showNotification({
-                title: 'Success',
-                message: 'Your message has been sent!',
-                color: 'green',
+                title: "Success",
+                message: "Your message has been sent!",
+                color: "green",
                 icon: <TickIcon />,
             });
         } catch (error) {
             showNotification({
-                title: 'Error',
-                message: 'There was an error sending the email. Please try again later.',
-                color: 'red',
+                title: "Error",
+                message: "There was an error sending the email. Please try again later.",
+                color: "red",
                 icon: <CrossIcon />,
             });
         }
 
-        setButtonText('Send');
+        setButtonText("Send");
+    };
+
+    const renderInputField = (field: typeof formFields[number]) => {
+        const commonProps = {
+            required: true,
+            value: formDetails[field.name],
+            placeholder: field.placeholder,
+            onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+                onFormUpdate(field.name, e.target.value),
+            styles: {
+                label: { ...inputStyle.textFieldLabelStyle },
+                input: { ...inputStyle.textFieldInputStyle },
+            },
+        };
+
+        if (field.type === "textarea") {
+            return (
+                <Col span={12} key={field.name}>
+                    <Textarea {...commonProps} rows={6} mb="md" />
+                </Col>
+            );
+        }
+
+        return (
+            <Col span={12} md={6} key={field.name}>
+                <TextInput {...commonProps} type={field.type} mb="sm" />
+            </Col>
+        );
     };
 
     return (
-        <Box
-            sx={{
-                backgroundColor: "#000",
-                color: "#fff",
-                minHeight: "100vh",
-                paddingTop: "60px",
-                marginTop: '-60px'
-            }}
-        >
-            <Container size="xl" w="100%" sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                margin: "auto",
-                minHeight: "100vh",
-            }}
-            >
+        <Box style={boxStyle.BoxStyle}>
+            <Container size="xl" w="100%" style={style.ContactContainerStyle}>
                 <Grid align="center">
                     <Col span={12} md={6}>
                         <Image src={contactImg} alt="Contact Us" radius="md" />
                     </Col>
-                    <Col span={12} md={6} sx={{ display: "flex", alignItems: "flex-start", flexDirection: "column", gap: "20px" }}>
+                    <Col span={12} md={6} display="flex" style={style.ConatctColStyle}>
                         <Text size="xl" weight={700}>
                             Get In Touch
                         </Text>
                         <Text size="sm">
-                            If you have any questions or concerns, please don't hesitate to contact me. I am open to any work opportunities that align with my skills and interests.
+                            If you have any questions or concerns, please don't hesitate to
+                            contact me. I am open to any work opportunities that align with my
+                            skills and interests.
                         </Text>
                         <form onSubmit={handleSubmit}>
                             <Grid gutter="md">
-                                {formFields.map((field) => (
-                                    <Fragment key={field.name}>
-                                        {field.type === 'textarea' ? (
-                                            <Col span={12}>
-                                                <Textarea
-                                                    required
-                                                    rows={6}
-                                                    value={formDetails[field.name]}
-                                                    placeholder={field.placeholder}
-                                                    onChange={(e) => onFormUpdate(field.name, e.target.value)}
-                                                    mb={"md"}
-                                                    styles={{
-                                                        label: { ...inputStyle.textFieldLabelStyle },
-                                                        input: { ...inputStyle.textFieldInputStyle },
-                                                    }}
-                                                />
-                                            </Col>
-                                        ) : (
-                                            <Col span={12} md={6}>
-                                                <TextInput
-                                                    required
-                                                    type={field.type}
-                                                    value={formDetails[field.name]}
-                                                    placeholder={field.placeholder}
-                                                    onChange={(e) => onFormUpdate(field.name, e.target.value)}
-                                                    mb={"sm"}
-                                                    styles={{
-                                                        label: { ...inputStyle.textFieldLabelStyle },
-                                                        input: { ...inputStyle.textFieldInputStyle },
-                                                    }}
-                                                />
-                                            </Col>
-                                        )}
-                                    </Fragment>
-                                ))}
+                                {formFields.map(renderInputField)}
                                 <Col span={12}>
                                     <Button
                                         type="submit"
@@ -158,7 +125,7 @@ export const Contact: React.FC = () => {
                                         radius="md"
                                         size="sm"
                                         fullWidth
-                                        style={{ color: "#fff", height: "50px" }}
+                                        style={style.ConatctButtonStyle}
                                     >
                                         {buttonText}
                                     </Button>

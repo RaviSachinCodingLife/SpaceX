@@ -9,48 +9,31 @@ import {
     Stack,
     Badge,
 } from "@mantine/core";
-import { useState } from "react";
-import { useCartStore } from "../../../store/useCartStore";
-import * as inputstyle from "../../Auth/style"
+import * as inputstyle from "../../Auth/style";
+import * as style from "./style";
+import { useCartInfo } from "./useTimelineHook";
+import CouponOfferCard from "./CouponOfferCard";
 
 const CartInfo = () => {
-    const { cart, getTotal } = useCartStore();
-    const [coupon, setCoupon] = useState("");
-    const [error, setError] = useState("");
-    const [discountApplied, setDiscountApplied] = useState(false);
+    const {
+        coupon,
+        discountApplied,
+        error,
+        setCoupon,
+        total,
+        cartItem,
+        handleApplyCoupon,
+        charges,
+        discount,
+    } = useCartInfo();
 
-    const subtotal = getTotal();
-    const shipping = 34.02;
-    const duties = 24.8;
-    const taxes = 13.39;
 
-    const discount = discountApplied ? 100 : 0;
-    const total = subtotal + shipping + duties + taxes - discount;
-
-    const cartItem = cart[0];
-
-    const handleApplyCoupon = () => {
-        if (coupon !== "SpaceX100") {
-            setError("Invalid coupon code.");
-            setDiscountApplied(false);
-        } else if (subtotal + shipping + duties + taxes < 250) {
-            setError("Coupon can only be applied to orders of $250 or more.");
-            setDiscountApplied(false);
-        } else {
-            setError("");
-            setDiscountApplied(true);
-        }
-    };
 
     return (
-        <Box
-            sx={{
-                width: 600,
-            }}
-        >
+        <Box w={600}>
             {cartItem && (
                 <Group align="center" mb="lg">
-                    <Box sx={{ position: "relative" }}>
+                    <Box pos={"relative"}>
                         <Image
                             src={cartItem.image}
                             alt={cartItem.title}
@@ -59,20 +42,18 @@ const CartInfo = () => {
                             fit="contain"
                         />
                         <Badge
-                            sx={{
-                                position: "absolute",
-                                top: -8,
-                                right: -8,
-                                borderRadius: "50%",
-                            }}
+                            pos={"absolute"}
+                            top={-8}
+                            right={-8}
+                            radius={"50%"}
                             size="lg"
-                            color="gray"
+                            color="dark"
                         >
                             {cartItem.quantity}
                         </Badge>
                     </Box>
                     <Box>
-                        <Text size="sm" fw={500}>
+                        <Text size="sm" fw={500} c={"#000"}>
                             {cartItem.title}
                         </Text>
                         <Text size="xs" color="dimmed">
@@ -91,9 +72,9 @@ const CartInfo = () => {
 
             <Group mb={4} noWrap>
                 <TextInput
-                    name={"coupon"}
-                    placeholder={"Discount code or gift card"}
-                    type={"text"}
+                    name="coupon"
+                    placeholder="Discount code or gift card"
+                    type="text"
                     value={coupon}
                     onChange={(e) => setCoupon(e.target.value)}
                     styles={{
@@ -103,37 +84,40 @@ const CartInfo = () => {
                             borderRadius: "10px !important",
                         },
                     }}
-                    sx={{ alignSelf: "flex-end", paddingRight: "10px", flex: 1 }}
+                    sx={style.CartTextInputStyle}
                     error={error || undefined}
                 />
                 <Button
                     variant="default"
-                    onClick={handleApplyCoupon}
-                    disabled={discountApplied}
+                    onClick={() => handleApplyCoupon()}
+                    disabled={discountApplied || coupon.trim() === ""}
                 >
                     {discountApplied ? "Applied" : "Apply"}
                 </Button>
             </Group>
 
+            <CouponOfferCard
+                onApply={() => {
+                    setCoupon("SpaceX100");
+                    handleApplyCoupon("SpaceX100");
+                }}
+                applied={discountApplied}
+            />
+
             <Divider mt="xl" mb="xl" />
 
             <Stack spacing={6}>
-                <Group position="apart">
-                    <Text size="sm">Subtotal</Text>
-                    <Text size="sm">${subtotal.toFixed(2)}</Text>
-                </Group>
-                <Group position="apart">
-                    <Text size="sm">Shipping + Handling</Text>
-                    <Text size="sm">${shipping.toFixed(2)}</Text>
-                </Group>
-                <Group position="apart">
-                    <Text size="sm">Duties</Text>
-                    <Text size="sm">${duties.toFixed(2)}</Text>
-                </Group>
-                <Group position="apart">
-                    <Text size="sm">Taxes</Text>
-                    <Text size="sm">${taxes.toFixed(2)}</Text>
-                </Group>
+                {charges.map((item, index) => (
+                    <Group position="apart" key={index}>
+                        <Text size="sm" c={"#000"}>
+                            {item.label}
+                        </Text>
+                        <Text size="sm" color="dimmed">
+                            ${item.value.toFixed(2)}
+                        </Text>
+                    </Group>
+                ))}
+
                 {discountApplied && (
                     <Group position="apart">
                         <Text size="sm" color="green">
@@ -149,9 +133,11 @@ const CartInfo = () => {
             <Divider mt="xl" mb="xl" />
 
             <Group position="apart" mt="sm">
-                <Text size={"md"} fw={500}>Total</Text>
-                <Text fw={500} size="lg">
-                    <span style={{ fontSize: "12px", color: "grey" }}>USD</span>   ${total.toFixed(2)}
+                <Text size="md" fw={500} c={"#000"}>
+                    Total
+                </Text>
+                <Text fw={500} size="lg" color="dimmed">
+                    <span style={{ fontSize: "12px", color: "grey" }}>USD</span> ${total.toFixed(2)}
                 </Text>
             </Group>
         </Box>

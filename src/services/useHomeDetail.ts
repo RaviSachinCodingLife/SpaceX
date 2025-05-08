@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { HomeFeature, homeFeatures } from "../utils/homeFeatures";
+import {  homeFeatures } from "../utils/homeFeatures";
+import { HomeFeature } from "../utils/type";
 
 export const useHomeDetail = (id: string) => {
   return useQuery<HomeFeature>({

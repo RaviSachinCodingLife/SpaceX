@@ -1,21 +1,5 @@
 import { create } from "zustand";
-
-interface CartItem {
-  id: string;
-  title: string;
-  price: string;
-  image: string;
-  color: string | null;
-  size: string | null;
-  quantity: number;
-}
-
-interface CartState {
-  cart: CartItem[];
-  addToCart: (item: CartItem) => void;
-  getTotal: () => number;
-  getItemCount: () => number;
-}
+import { CartState } from "./type";
 
 export const useCartStore = create<CartState>((set, get) => ({
   cart: [],

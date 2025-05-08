@@ -1,21 +1,5 @@
 import { create } from "zustand";
-
-interface SignUpState {
-  isAuthenticated: boolean;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  error: string;
-  signUp: (
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string
-  ) => void;
-  setError: (error: string) => void;
-  clearForm: () => void;
-}
+import { SignUpState } from "./type";
 
 export const useSignUpStore = create<SignUpState>((set) => ({
   isAuthenticated: false,

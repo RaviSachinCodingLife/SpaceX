@@ -28,19 +28,8 @@ import img26 from "../assets/images/Shop/27.webp";
 import img27 from "../assets/images/Shop/28.webp";
 import img28 from "../assets/images/Shop/29.webp";
 import img29 from "../assets/images/Shop/30.webp";
+import { CartItem } from "./type";
 
-
-export interface CartItem {
-    quantity?: number;
-    id: string;
-    title: string;
-    fabricContent: string;
-    image: string;
-    price: string;
-    color: string[];
-    size: string[];
-    link: string;
-}
 
 export const CartItems: CartItem[] = [
     {
