@@ -14,8 +14,8 @@ import AstronautDetails from "../pages/Astronaut/AstronautDetails";
 import { Contact } from "../pages/Contact/Contact";
 import Careers from "../pages/Careers/Careers";
 import NotFound from "../components/NotFound/NotFound";
-import LaunchDetail from "../pages/Launches/launchDetails";
-import LaunchList from "../pages/Launches/launchList";
+import LaunchList from "../pages/Launches/LaunchList";
+import LaunchDetail from "../pages/Launches/LaunchDetails";
 
 const routes = [
     {
