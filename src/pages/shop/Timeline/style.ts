@@ -20,6 +20,16 @@ const CartTextInputStyle = {
   flex: 1,
 };
 
+const CartWrapperStyle: any = {
+  padding: "80px 200px",
+  "@media (max-width: 992px)": {
+    padding: "80px 100px",
+  },
+  "@media (max-width: 600px)": {
+    padding: "80px 20px",
+  },
+};
+
 const PaymentTooltipStyle: any = {
   fontSize: "12px",
   padding: "4px 8px",
@@ -38,4 +48,5 @@ export {
   CartFlexBoxStyle,
   CartTextInputStyle,
   PaymentIconStyle,
+  CartWrapperStyle,
 };

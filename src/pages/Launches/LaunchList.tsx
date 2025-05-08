@@ -15,7 +15,7 @@ const LaunchList = () => {
         <Title style={style.LaunchTitleStyle}>LAUNCHES</Title>
       </Box>
 
-      <Box style={style.LaunchStatsStyle}>
+      <Box sx={style.LaunchStatsStyle}>
         {stats.map((stat) => (
           <Box key={stat.label} ta="center">
             <Title order={1} fz="140px" fw={400}>

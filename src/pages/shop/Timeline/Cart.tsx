@@ -20,15 +20,15 @@ const Cart = () => {
     const { cartItems, getTotal, increment, decrement, remove } = useCart();
 
     return (
-        <Box px={50}>
+        <Box px={50} sx={style.CartWrapperStyle}>
             <Title order={2} ta="center" c="#000" mb="xl" mt="md" fw={600}>
                 CART
             </Title>
 
             <Grid mt="xl">
-                <Grid.Col span={8}><Title order={4} mb="md" c="#000">Product</Title></Grid.Col>
-                <Grid.Col span={2}><Title order={4} ta="center" mb="md" c="#000">Quantity</Title></Grid.Col>
-                <Grid.Col span={2}><Title order={4} ta="center" mb="md" c="#000">Total</Title></Grid.Col>
+                <Grid.Col span={8} md={6} sm={4}><Title order={4} mb="md" c="#000">Product</Title></Grid.Col>
+                <Grid.Col span={2} md={6} sm={4}><Title order={4} ta="center" mb="md" ml={"lg"} c="#000">Quantity</Title></Grid.Col>
+                <Grid.Col span={2} md={6} sm={4}><Title order={4} ta="center" mb="md" ml={"lg"} c="#000">Total</Title></Grid.Col>
             </Grid>
 
             <Divider />

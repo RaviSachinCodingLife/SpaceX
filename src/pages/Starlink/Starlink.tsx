@@ -24,8 +24,6 @@ import { videoList } from "../../utils/startLinkVideoList";
 import { useStartLink } from "./useStartLinkHook";
 import * as style from "./style";
 
-
-
 const Starlink = () => {
     const { opened, setOpened, planCards, downloadButtons, selectedVideo, setSelectedVideo } = useStartLink();
 
@@ -39,14 +37,14 @@ const Starlink = () => {
                     zIndex={1}
                 />
 
-                <Container size="lg" style={style.Section1ContainerStyle}>
+                <Container size="lg" sx={style.Section1ContainerStyle}>
                     <Center style={style.Section1CenterStyle}>
                         <Stack spacing="xl" align="center">
                             <Title
                                 order={1}
                                 ta="center"
                                 fz={{ base: 40, md: 60 }}
-                                style={style.Section1TitleStyle}
+                                sx={style.Section1TitleStyle}
                             >
                                 HIGH-SPEED INTERNET <br /> AROUND THE WORLD
                             </Title>
@@ -74,11 +72,11 @@ const Starlink = () => {
                                 {planCards.map((plan) => (
                                     <Paper
                                         withBorder
-                                        style={style.Section1PaperStyle}
+                                        sx={style.Section1PaperStyle}
                                         key={plan.title}
                                     >
                                         <Stack>
-                                            <Title order={3} c="#fff" fz="28px" fw={500}>
+                                            <Title order={3} c="#fff" fz={"28px"} fw={500}>
                                                 {plan.title}
                                             </Title>
                                             <Text size="md" c="#fff" fz="16px" fw={500}>
@@ -113,10 +111,10 @@ const Starlink = () => {
                         <Image
                             src={starLinkBgImg2}
                             alt="Connectivity Where You Least Expect It"
-                            style={style.Section2ImageStyle}
+                            sx={style.Section2ImageStyle}
                         />
                         <Box style={style.Section2BoxStyle}>
-                            <Title order={2} c="#fff" fz="36px" mb="20px">
+                            <Title order={2} c="#fff" fz={{ base: "36px", md: "20px" }} mb="20px">
                                 CONNECTIVITY WHERE YOU <br /> LEAST EXPECT IT
                             </Title>
                             <Text c="#fff" fz="18px" lh={1.6}>

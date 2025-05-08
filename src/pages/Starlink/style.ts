@@ -18,14 +18,31 @@ const StarLinkButtonStyle: CSSProperties = {
   color: "#fff",
 };
 
-const Section1ContainerStyle: CSSProperties = {
+const Section1ContainerStyle: any = {
   height: "100%",
   position: "relative",
   zIndex: 2,
+
+  "@media (max-width: 992px)": {
+    padding: "60px",
+  },
+
+  "@media (max-width: 600px)": {
+    padding: "40px",
+  },
 };
 
 const Section1CenterStyle: CSSProperties = { minHeight: "100vh" };
-const Section1TitleStyle: CSSProperties = { fontSize: "75px" };
+const Section1TitleStyle: any = {
+  fontSize: "75px",
+  "@media (max-width: 992px)": {
+    fontSize: "60px",
+  },
+
+  "@media (max-width: 600px)": {
+    fontSize: "40px",
+  },
+};
 const Section1ButtonStyle = {
   display: "inline-flex",
   alignItems: "center",
@@ -35,7 +52,7 @@ const Section1ButtonStyle = {
     color: "#000",
   },
 };
-const Section1PaperStyle: CSSProperties = {
+const Section1PaperStyle: any = {
   backgroundColor: "rgba(0, 0, 0, 0.6)",
   borderRadius: "8px",
   border: "1px solid hsla(0, 0%, 100%, 0.12)",
@@ -43,13 +60,28 @@ const Section1PaperStyle: CSSProperties = {
   backdropFilter: "blur(4px)",
   padding: "24px",
   width: "100%",
-  minHeight: "200px",
+  minHeight: "250px",
+
+  "@media (max-width: 992px)": {
+    minHeight: "250px",
+  },
+
+  "@media (max-width: 600px)": {
+    minWidth: "400px",
+  },
 };
-const Section2ImageStyle: CSSProperties = {
+const Section2ImageStyle: any = {
   borderRadius: "16px",
   boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
   width: "100%",
   height: "auto",
+  "@media (max-width: 992px)": {
+    height: "auto",
+  },
+
+  "@media (max-width: 600px)": {
+    height: "500px",
+  },
 };
 
 const Section2BoxStyle: CSSProperties = {

@@ -28,7 +28,7 @@ const LaunchTitleStyle: CSSProperties = {
   zIndex: 1,
 };
 
-const LaunchStatsStyle: CSSProperties = {
+const LaunchStatsStyle: any = {
   backgroundColor: "black",
   color: "white",
   display: "flex",
@@ -36,6 +36,17 @@ const LaunchStatsStyle: CSSProperties = {
   alignItems: "center",
   padding: "80px 0",
   gap: "100px",
+  "@media (max-width: 992px)": {
+    flexDirection: "column",
+    gap: "50px",
+    padding: "60px 0",
+  },
+
+  "@media (max-width: 600px)": {
+    flexDirection: "column",
+    gap: "30px",
+    padding: "40px 0",
+  },
 };
 
 const LaunchLaunchCardStyle: CSSProperties = {

@@ -34,15 +34,23 @@ const CareersCarouselContainerStyle: CSSProperties = {
   maxWidth: "600px",
 };
 
-const CareersSpacXStyle: CSSProperties = {
+const CareersSpacXStyle: any = {
   backgroundColor: "#000",
   color: "#fff",
   textAlign: "center",
-  padding: "80px 20px",
   display: "flex",
   flexDirection: "column",
   gap: "10px",
   justifyContent: "center",
+  padding: "80px 300px",
+
+  "@media (max-width: 992px)": {
+    padding: "80px 100px",
+  },
+
+  "@media (max-width: 600px)": {
+    padding: "80px 20px",
+  },
 };
 
 const CareersSpacXActionIconStyle: any = {
@@ -62,7 +70,7 @@ const CareersSpacXActionIconStyle: any = {
   },
 };
 
-const ElonBoxStyle = (elonBgImg: string): CSSProperties => ({
+const ElonBoxStyle = (elonBgImg: string): any => ({
   backgroundImage: `url(${elonBgImg})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
@@ -73,8 +81,16 @@ const ElonBoxStyle = (elonBgImg: string): CSSProperties => ({
   flexDirection: "column",
   justifyContent: "flex-end",
   position: "relative",
-  padding: "0 40px 80px 40px",
+  padding: "0 300px 80px 300px",
   color: "#fff",
+
+  "@media (max-width: 992px)": {
+    padding: "0 100px 80px 100px",
+  },
+
+  "@media (max-width: 600px)": {
+    padding: "0 40px 80px 40px",
+  },
 });
 
 const ElonButtonBoxStyle: CSSProperties = {

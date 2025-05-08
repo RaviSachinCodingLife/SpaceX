@@ -28,6 +28,7 @@ const CheckoutButtonStyle: CSSProperties = {
 const ProductDetailGridStyle: CSSProperties = {
   backgroundColor: "#fff",
   padding: "10px",
+  marginTop: "10px",
 };
 
 const ProductDetailImageStyle: CSSProperties = {

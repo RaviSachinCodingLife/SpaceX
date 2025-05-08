@@ -86,7 +86,18 @@ export const Contact: FC = () => {
         if (field.type === "textarea") {
             return (
                 <Col span={12} key={field.name}>
-                    <Textarea {...commonProps} rows={6} mb="md" />
+                    <Textarea
+                        {...commonProps}
+                        rows={6}
+                        mb="md"
+                        styles={{
+                            ...commonProps.styles,
+                            input: {
+                                ...commonProps.styles.input,
+                                height: "100px",
+                            },
+                        }}
+                    />
                 </Col>
             );
         }

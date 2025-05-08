@@ -38,10 +38,10 @@ const Shipping = ({ form, username }: { form: FormData, username: string }) => {
                     Shipping method
                 </Title>
                 <Group position="apart" mt="xs">
-                    <Text size="lg" color="grey">
+                    <Text size="sm" color="grey">
                         {shippingMethod.name}
                     </Text>
-                    <Text size="lg" color="#000" fw={600}>
+                    <Text size="sm" color="#000" fw={600}>
                         {shippingMethod.price}
                     </Text>
                 </Group>

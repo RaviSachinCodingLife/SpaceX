@@ -31,23 +31,24 @@ const Information = ({ form, setForm, username }: InformationProps) => {
 
     return (
         <Stack spacing="md">
-            <Box>
+            <Stack spacing="md" p="md" style={{ border: "1px solid #e0e0e0", borderRadius: 8 }}>
                 <Text color="gray" size="sm">
                     Due to constraints from our carriers because of current events,
                     shipments may be delayed and stock may be limited.
                 </Text>
-            </Box>
 
-            <Divider />
+                <Divider color="gray" />
 
-            <Box>
-                <Title order={4} mb="xs">
-                    Contact
-                </Title>
-                <Text size="sm" color="gray" tt="capitalize">
-                    {username}
-                </Text>
-            </Box>
+                <Box display={"flex"}>
+                    <Title order={4} mb="xs" c="#000">
+                        Contact
+                    </Title>
+                    <Text size="sm" color="gray" tt="capitalize" ml={"auto"}>
+                        {username}
+                    </Text>
+                </Box>
+            </Stack>
+
 
             <Divider />
 
