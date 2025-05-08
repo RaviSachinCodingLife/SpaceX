@@ -20,6 +20,7 @@ const ProductDetail = () => {
         isAdded,
         addToCart,
         setIsAdded,
+        navigate,
     } = hookResult;
 
     const handleAddToCart = () => {
@@ -44,6 +45,7 @@ const ProductDetail = () => {
             size: selectedSize,
             quantity,
         });
+
 
         setIsAdded(true);
     };
@@ -150,7 +152,13 @@ const ProductDetail = () => {
                             variant="filled"
                             color="dark"
                             size="md"
-                            onClick={handleAddToCart}
+                            onClick={() => {
+                                if (isAdded) {
+                                    navigate("/cart");
+                                } else {
+                                    handleAddToCart();
+                                }
+                            }}
                         >
                             {isAdded ? "Go to Cart" : "Add to Cart"}
                         </Button>

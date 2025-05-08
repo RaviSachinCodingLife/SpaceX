@@ -32,6 +32,7 @@ const useShop = () => {
 
 const useProductHook = () => {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const { addToCart, cart } = useCartStore();
   const [isAdded, setIsAdded] = useState(false);
   const product = CartItems.find((item) => item.title === slug);
@@ -51,6 +52,7 @@ const useProductHook = () => {
     productState,
     isAdded,
     addToCart,
+    navigate,
     setIsAdded,
   };
 };
