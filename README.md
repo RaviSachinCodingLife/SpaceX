@@ -6,8 +6,8 @@
 
 Built using **React + Vite**, the project leverages **Zustand, React Query, Mantine UI**, and advanced routing with `react-router-dom`. It also features secure authentication using **JWT**, real-time email contact support via **EmailJS**, and full user experience enhancements including profile management, protected routes, and deep links.
 
-🚀 **Live Demo**: \[https://space-x-fawn.vercel.app/]
-📌 **GitHub Repository**: \[https://github.com/RaviSachinCodingLife/SpaceX.git]
+🚀 **Live Demo**: https://space-x-fawn.vercel.app/
+📌 **GitHub Repository**: https://github.com/RaviSachinCodingLife/SpaceX.git
 
 ---
 
@@ -161,5 +161,3 @@ Built with ❤️ using React, Vite, Zustand, Firebase, and Mantine.
 ## 📄 License
 
 This project is licensed under the **\[RaviSachinCosingLife License]**.
-
-
